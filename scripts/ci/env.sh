@@ -42,6 +42,9 @@ setEnvVar SAUCE_CONNECT_VERSION 4.3.11
 setEnvVar PROJECT_ROOT $(cd ${thisDir}/../..; pwd)
 
 if [[ ${TRAVIS:-} ]]; then
+  echo "Danesh"
+  echo `pwd`
+  pwd
   case ${CI_MODE} in
     js)
       setEnvVar KARMA_JS_BROWSERS ChromeNoSandbox
