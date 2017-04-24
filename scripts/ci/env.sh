@@ -71,6 +71,18 @@ fi
 
 
 if [[ ${TRAVIS:-} ]]; then
+   if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then
+    setEnvVar SAUCE_USERNAME angular2-ci
+    # - not using use setEnvVar so that we don't print the key
+    # - we overwrite the value set by Travis JWT addon here to work around travis-ci/travis-ci#7223 for NGBUILDS_IO_KEY
+    export SAUCE_ACCESS_KEY=693ebc16208a-0b5b-1614-8d66-a2662f4e
+  else
+    setEnvVar SAUCE_USERNAME angular-ci
+    # - not using use setEnvVar so that we don't print the key
+    # - we overwrite the value set by Travis JWT addon here to work around travis-ci/travis-ci#7223 for NGBUILDS_IO_KEY
+    export SAUCE_ACCESS_KEY=9b988f434ff8-fbca-8aa4-4ae3-35442987
+  fi
+
   # used by xvfb that is used by Chromium
   setEnvVar DISPLAY :99.0
 
@@ -90,17 +102,7 @@ if [[ ${TRAVIS:-} ]]; then
   # In order to have a meaningful SauceLabs badge on the repo page,
   # the angular2-ci account is used only when pushing commits to master;
   # in all other cases, the regular angular-ci account is used.
-  if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then
-    setEnvVar SAUCE_USERNAME angular2-ci
-    # - not using use setEnvVar so that we don't print the key
-    # - we overwrite the value set by Travis JWT addon here to work around travis-ci/travis-ci#7223 for NGBUILDS_IO_KEY
-    export SAUCE_ACCESS_KEY=693ebc16208a-0b5b-1614-8d66-a2662f4e
-  else
-    setEnvVar SAUCE_USERNAME angular-ci
-    # - not using use setEnvVar so that we don't print the key
-    # - we overwrite the value set by Travis JWT addon here to work around travis-ci/travis-ci#7223 for NGBUILDS_IO_KEY
-    export SAUCE_ACCESS_KEY=9b988f434ff8-fbca-8aa4-4ae3-35442987
-  fi
+
 
   setEnvVar BROWSER_STACK_USERNAME daneshqureshi2
   # not using use setEnvVar so that we don't print the key
