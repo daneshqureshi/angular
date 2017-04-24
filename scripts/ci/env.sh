@@ -53,13 +53,13 @@ if [[ ${TRAVIS:-} ]]; then
       setEnvVar KARMA_JS_BROWSERS `node -e "console.log(require('/home/travis/build/angular/angular/browser-providers.conf').sauceAliases.CI_REQUIRED.join(','))"`
       ;;
     browserstack_required)
-      setEnvVar KARMA_JS_BROWSERS `node -e "console.log(require('/home/travis/build/angular/angular/browser-providers.conf').browserstackAliases.CI_REQUIRED.join(','))"`
+      setEnvVar KARMA_JS_BROWSERS "BS_IOS7"
       ;;
     saucelabs_optional)
       setEnvVar KARMA_JS_BROWSERS `node -e "console.log(require('/home/travis/build/angular/angular/browser-providers.conf').sauceAliases.CI_OPTIONAL.join(','))"`
       ;;
     browserstack_optional)
-      setEnvVar KARMA_JS_BROWSERS `node -e "console.log(require('/home/travis/build/angular/angular/browser-providers.conf').browserstackAliases.CI_OPTIONAL.join(','))"`
+      setEnvVar KARMA_JS_BROWSERS "BS_EDGE,BS_SAFARI7,BS_SAFARI8,BS_SAFARI9,BS_SAFARI10,BS_IOS8,BS_IOS9,BS_WINDOWSPHONE"
       ;;
     aio)
       # Due to network latency/server performance, the min accepted PWA score
